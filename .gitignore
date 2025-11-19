@@ -1,66 +1,33 @@
-# Environment variables
-.env
-.env.local
-.env.*.local
-
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+*.pyo
+*.pyd
+*.pkl
 
-# Virtual environments
+# Virtualenv
+.venv/
 venv/
-ENV/
 env/
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
+
+# Logs
+logs/
+*.log
+
+# Models & large artifacts
+#models/
+#checkpoints/
+*.pt
+*.bin
+
+# Streamlit / cache
+.streamlit/
+.cache/
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Model files (large)
-*.pth
-*.pt
-*.safetensors
-*.bin
-models/*.pth
-models/*.pt
-
-# Memory databases
-*.dragon
-memory.dragon
-
-# Logs
-*.log
-logs/
-
-# Streamlit
-.streamlit/
-
-# Temporary files
-*.tmp
-*.temp
-
