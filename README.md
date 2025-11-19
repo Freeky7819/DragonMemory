@@ -142,9 +142,6 @@ Contributions are welcome! Please read the LICENSE file for details on our code 
 
 ## 📄 License
 
-## License
-
-
 DragonMemory (code in this repository) is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
 
 In practice, this means:
