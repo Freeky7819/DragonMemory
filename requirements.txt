@@ -1,5 +1,6 @@
 torch>=2.0.0
 numpy
+pandas
 sentence-transformers
 streamlit
 openai-whisper
@@ -8,4 +9,7 @@ python-docx
 python-dotenv
 requests
 transformers
+openai
+accelerate
+einops
 
