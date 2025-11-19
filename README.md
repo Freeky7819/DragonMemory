@@ -32,10 +32,20 @@ pip install -r requirements.txt
 # Ensure the model weights are in place
 # Place dragon_pro_1_16.pth in models/ directory
 ConfigurationCopy .env.example to .env:Bashcp .env.example .env
-Edit .env with your settings:Code snippetOLLAMA_BASE_URL=http://localhost:11434
+2. Edit `.env` with your settings:
+```env
+OLLAMA_BASE_URL=http://localhost:11434
 # Optional: Add OPENAI_API_KEY if using GPT models
-Make sure Ollama is running locally with your preferred model (llama3, mistral, etc.).Running the ApplicationBashstreamlit run gui_app.py
-📁 Project StructureDragonMemory/
+Make sure Ollama is running locally with your preferred model (llama3, mistral, etc.).
+
+Running the Application
+Bash
+
+streamlit run gui_app.py
+📁 Project Structure
+Plaintext
+
+DragonMemory/
 ├── assets/                  # Images and assets
 ├── src/                     # Main source code
 │   ├── __init__.py
@@ -50,6 +60,7 @@ Make sure Ollama is running locally with your preferred model (llama3, mistral, 
 ├── .env.example             # Environment template
 ├── LICENSE                  # AGPLv3
 └── README.md                # Documentation
+```
 
 ## 🧠 Architecture
 
