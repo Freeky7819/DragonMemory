@@ -42,6 +42,7 @@ Running the Application
 Bash
 
 streamlit run gui_app.py
+
 📁 Project Structure
 Plaintext
 
