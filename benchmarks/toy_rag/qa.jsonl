@@ -1,0 +1,6 @@
+{"id": "q1", "question": "What does a neuron compute before applying its activation function?", "answers": ["weighted sum of its inputs", "a weighted sum of its inputs"], "doc_ids": ["nn_1"]}
+{"id": "q2", "question": "What is adjusted during training in a neural network?", "answers": ["its weights", "the weights"], "doc_ids": ["nn_1"]}
+{"id": "q3", "question": "What is the name of the boundary around a black hole beyond which nothing can return?", "answers": ["event horizon", "the event horizon"], "doc_ids": ["astro_1"]}
+{"id": "q4", "question": "What kind of radiation is often emitted by accretion disks around black holes?", "answers": ["x-rays", "x rays", "xray radiation"], "doc_ids": ["astro_1"]}
+{"id": "q5", "question": "What two main components does a retrieval-augmented generation system combine?", "answers": ["a language model and a search component", "language model and search component"], "doc_ids": ["rag_1"]}
+{"id": "q6", "question": "Why can a RAG system answer up-to-date questions without retraining the model?", "answers": ["because it retrieves documents at query time", "because it retrieves relevant documents at query time"], "doc_ids": ["rag_1"]}
