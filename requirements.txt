@@ -1,0 +1,11 @@
+torch>=2.0.0
+numpy
+sentence-transformers
+streamlit
+openai-whisper
+pypdf
+python-docx
+python-dotenv
+requests
+transformers
+
