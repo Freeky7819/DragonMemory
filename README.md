@@ -74,7 +74,7 @@ DragonMemory/
 
 ## 🧠 Architecture
 
-### Dragon v8: Light Resonant Architecture
+### Dragon v7: Light Resonant Architecture
 
 - **Compression Ratio**: 16:1 (128 tokens → 8 tokens)
 - **Architecture**: Multi-phase resonant pointer with neighbor mixing
