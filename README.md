@@ -27,6 +27,7 @@ cd DragonMemory
 
 # Install dependencies
 pip install -r requirements.txt
+```
 
 # Ensure the model weights are in place
 # Place dragon_pro_1_16.pth in models/ directory
