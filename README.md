@@ -164,18 +164,3 @@ If you are a company and would like to use DragonMemory inside a proprietary, cl
 
 For questions or support, please open an issue on the repository.
 
----
-
-**Made with ❤️ for efficient memory compression**
-
-### Harmonic Signature Protocol
-
-This project follows the Harmonic Signature Protocol:
-
-- intent: resonant, ethical learning and transparent evaluation
-- omega ≈ 6.0
-- gamma ≈ 0.0
-- phi   ≈ π/3
-
-The DragonMemory architecture is designed to preserve semantic structure under log-periodic compression, 
-and all reported metrics are obtained under the Truth Protocol (no cherry-picking, full experimental context).
