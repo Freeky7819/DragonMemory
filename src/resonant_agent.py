@@ -15,9 +15,9 @@ except ImportError:
 load_dotenv()
 
 class ResonantAgent:
-    def __init__(self):
+    def __init__(self, ratio=16):
         print("Initializing Agent v3.6 (Multi-Backend)...")
-        self.rag = ResonantRAG()
+        self.rag = ResonantRAG(ratio=ratio)
         
         # Connection settings
         self.ollama_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434") + "/api/generate"
@@ -58,9 +58,10 @@ class ResonantAgent:
     def clear_chat_history(self):
         self.chat_history = []
 
-    def query_llm(self, user_input, context_data=None, system_persona="", use_history=True):
+    def query_llm(self, user_input, context_data=None, system_persona="", use_history=True, show_thoughts=False):
         """
         Main brain. Supports both Ollama and OpenAI.
+        Returns (reply, thought) tuple.
         """
         
         # 1. PREPARE SYSTEM INSTRUCTION (System Prompt)
@@ -70,22 +71,24 @@ class ResonantAgent:
             base_system += f"\n\nCONTEXT FROM KNOWLEDGE BASE:\n{chr(10).join(context_data)}"
             base_system += "\n\nInstructions: Answer based primarily on the context above."
 
-        # 2. CHECK: Are we using OpenAI?
-        # If model name starts with "gpt" (e.g. gpt-4o, gpt-3.5-turbo), use OpenAI
-        if self.active_model.lower().startswith("gpt"):
-            return self._query_openai(user_input, base_system, use_history)
-        else:
-            return self._query_ollama(user_input, base_system, use_history)
+        # ADDED: Instruction for generating thoughts if enabled
+        if show_thoughts:
+            base_system += "\n\nCRITICAL INSTRUCTION: Enclose your internal thought process or reasoning steps for answering the user's question within special XML tags: <THOUGHT>Your internal reasoning here</THOUGHT>. Do not show these tags unless specifically instructed."
 
-    def _query_openai(self, user_input, base_system, use_history):
+        # 2. CHECK: Are we using OpenAI?
+        if self.active_model.lower().startswith("gpt"):
+            return self._query_openai(user_input, base_system, use_history, show_thoughts)
+        else:
+            return self._query_ollama(user_input, base_system, use_history, show_thoughts)
+
+    def _query_openai(self, user_input, base_system, use_history, show_thoughts=False):
         if not self.openai_client:
-            return "Error: OpenAI API Key missing. Please enter it in the sidebar."
+            return "Error: OpenAI API Key missing. Please enter it in the sidebar.", ""
 
         # Prepare messages in OpenAI format
         messages = [{"role": "system", "content": base_system}]
         
         if use_history and self.chat_history:
-            # Convert history ("User", "text") to format {"role": "user", "content": "..."}
             for role, text in self.chat_history[-self.max_history_len:]:
                 role_lower = "user" if role == "User" else "assistant"
                 messages.append({"role": role_lower, "content": text})
@@ -100,16 +103,25 @@ class ResonantAgent:
             )
             reply = response.choices[0].message.content
             
+            # Parse thoughts if enabled
+            thought = ""
+            if show_thoughts:
+                if "<THOUGHT>" in reply and "</THOUGHT>" in reply:
+                    thought_start = reply.find("<THOUGHT>") + len("<THOUGHT>")
+                    thought_end = reply.find("</THOUGHT>")
+                    thought = reply[thought_start:thought_end].strip()
+                    # Remove thoughts from final reply
+                    reply = reply.replace(reply[reply.find("<THOUGHT>"):thought_end + len("</THOUGHT>")], "").strip()
+            
             if use_history:
                 self.chat_history.append(("User", user_input))
                 self.chat_history.append(("Assistant", reply))
             
-            return reply
+            return reply, thought
         except Exception as e:
-            return f"OpenAI Error: {str(e)}"
+            return f"OpenAI Error: {str(e)}", ""
 
-    def _query_ollama(self, user_input, base_system, use_history):
-        # Existing logic for Ollama (unchanged, just moved to its own function)
+    def _query_ollama(self, user_input, base_system, use_history, show_thoughts=False):
         history_str = ""
         if use_history and self.chat_history:
             history_str = "\n\nCONVERSATION HISTORY:\n"
@@ -129,11 +141,22 @@ class ResonantAgent:
             response = requests.post(self.ollama_url, json=payload)
             if response.status_code == 200:
                 reply = response.json().get('response', '')
+                
+                # Parse thoughts if enabled
+                thought = ""
+                if show_thoughts:
+                    if "<THOUGHT>" in reply and "</THOUGHT>" in reply:
+                        thought_start = reply.find("<THOUGHT>") + len("<THOUGHT>")
+                        thought_end = reply.find("</THOUGHT>")
+                        thought = reply[thought_start:thought_end].strip()
+                        # Remove thoughts from final reply
+                        reply = reply.replace(reply[reply.find("<THOUGHT>"):thought_end + len("</THOUGHT>")], "").strip()
+                
                 if use_history:
                     self.chat_history.append(("User", user_input))
                     self.chat_history.append(("Assistant", reply))
-                return reply
+                return reply, thought
             else:
-                return f"Ollama Error: {response.text}"
+                return f"Ollama Error: {response.text}", ""
         except Exception as e:
-            return f"Connection Error: {e}"
+            return f"Connection Error: {e}", ""
