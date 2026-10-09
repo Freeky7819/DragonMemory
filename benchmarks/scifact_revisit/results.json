@@ -1,0 +1,73 @@
+{
+ "results": [
+  {
+   "method": "A  MiniLM sentence emb (256 tok)",
+   "floats_per_doc": 384,
+   "ndcg10": 0.6484032131749053,
+   "recall10": 0.7883333333333333,
+   "hit1": 0.5033333333333333
+  },
+  {
+   "method": "A' MiniLM sentence emb (128 tok)",
+   "floats_per_doc": 384,
+   "ndcg10": 0.6221824663228522,
+   "recall10": 0.7620000000000001,
+   "hit1": 0.4866666666666667
+  },
+  {
+   "method": "B  Dragon flatten 3072 (repo way)",
+   "floats_per_doc": 3072,
+   "ndcg10": 0.19827347971437934,
+   "recall10": 0.30844444444444447,
+   "hit1": 0.1
+  },
+  {
+   "method": "C  Dragon mean of 8 slots",
+   "floats_per_doc": 384,
+   "ndcg10": 0.44018264778666444,
+   "recall10": 0.6139444444444444,
+   "hit1": 0.29
+  },
+  {
+   "method": "D  Dragon MaxSim over 8 slots",
+   "floats_per_doc": 3072,
+   "ndcg10": 0.3811885274522716,
+   "recall10": 0.5325555555555556,
+   "hit1": 0.24333333333333335
+  },
+  {
+   "method": "E1 dumb: 8 segment means, MaxSim",
+   "floats_per_doc": 3072,
+   "ndcg10": 0.6638898808523015,
+   "recall10": 0.791,
+   "hit1": 0.54
+  },
+  {
+   "method": "E2 dumb: 8 random tokens, MaxSim",
+   "floats_per_doc": 3072,
+   "ndcg10": 0.4340301938159496,
+   "recall10": 0.5848888888888889,
+   "hit1": 0.30666666666666664
+  },
+  {
+   "method": "E3 dumb: mean of real tokens",
+   "floats_per_doc": 384,
+   "ndcg10": 0.6459934486452507,
+   "recall10": 0.7905555555555556,
+   "hit1": 0.5033333333333333
+  },
+  {
+   "method": "F  all tokens MaxSim (no compression)",
+   "floats_per_doc": 49152,
+   "ndcg10": 0.6721988707147578,
+   "recall10": 0.796,
+   "hit1": 0.5333333333333333
+  }
+ ],
+ "pad_slots": {
+  "docs": 0.00024117306747939438,
+  "queries": 0.3266666531562805
+ },
+ "n_docs": 5183,
+ "n_queries": 300
+}

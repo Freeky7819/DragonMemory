@@ -1,5 +1,7 @@
 # 🐉 DragonMemory
 
+> **⚠️ October 2026 revisit:** re-tested on the BEIR SciFact benchmark, the Dragon v7 compressor does **not** improve retrieval — plain MiniLM RAG scores nDCG@10 0.648 vs 0.198 for Dragon as searched here, and a trivial 8-segment-mean baseline (0.664) beats it. Several performance claims below are not reproducible. Full results and the code-level reasons: **[REVISIT_2026.md](REVISIT_2026.md)**.
+
 **Neural Embedding Compression System for RAG Applications**
 
 DragonMemory is a production-ready RAG system that utilizes a custom neural architecture (Dragon v7) to compress semantic context. It reduces the sequence length of embeddings by a factor of 16 (16:1 pooling) while maintaining high semantic retrieval accuracy. 
